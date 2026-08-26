@@ -1,0 +1,208 @@
+/* NewClear brand overrides. The original SVG nodes stay in the DOM so the
+   downloaded Webflow animations can still initialize without errors. */
+.nav-logo,
+.nothin-hero-svg,
+.footer-nothin-svg {
+  opacity: 0 !important;
+}
+
+.nav-logo-wrap,
+.nothin-hero-w,
+.footer-svg-w {
+  position: relative;
+}
+
+.nav-logo-wrap {
+  min-width: 7.75rem !important;
+}
+
+.newclear-wordmark {
+  color: currentColor;
+  font-family: "PP Neue Montreal", Arial, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.07em;
+  line-height: 0.78;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.newclear-wordmark--nav {
+  font-size: 1.35rem;
+  left: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.newclear-wordmark--hero,
+.newclear-wordmark--footer {
+  align-items: center;
+  display: flex;
+  font-size: 17.5vw;
+  inset: 0;
+  justify-content: center;
+  position: absolute;
+}
+
+.newclear-wordmark--hero {
+  background: var(--white, #fff);
+  font-size: 19vw;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.newclear-wordmark--hero .newclear-letter-mask {
+  transform: scaleY(1.18);
+  transform-origin: center;
+}
+
+.newclear-letter-mask {
+  display: block;
+  line-height: 0.78;
+  overflow: hidden;
+}
+
+.newclear-letter {
+  display: block;
+  transform: translateY(120%);
+  will-change: transform;
+}
+
+.newclear-wordmark--hero.is-revealing .newclear-letter {
+  animation: newclear-letter-in 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: calc(var(--letter-index) * 110ms);
+}
+
+.newclear-wordmark--hero.is-complete {
+  opacity: 1;
+  transition: opacity 320ms ease;
+}
+
+.newclear-wordmark--hero.is-complete .newclear-letter {
+  transform: translateY(0%);
+}
+
+.section-w .mask-reveal-canvas {
+  transition: opacity 320ms ease;
+}
+
+.section-w:has(.newclear-wordmark--hero.is-revealing) .mask-reveal-canvas {
+  opacity: 0 !important;
+  transition: none;
+}
+
+.section-w:has(.newclear-wordmark--hero.is-revealing) .section.hero-home {
+  background-color: var(--white, #fff) !important;
+}
+
+@keyframes newclear-letter-in {
+  from {
+    transform: translateY(120%);
+  }
+
+  to {
+    transform: translateY(0%);
+  }
+}
+
+/* Keep the HTML fallback until the smoke canvas initializes. Once it exists,
+   the canvas becomes the visible NEWCLEAR wordmark and the video is revealed
+   through its fluid mask. */
+.section-w:has(.mask-reveal-canvas) .newclear-wordmark--hero:not(.is-revealing) {
+  opacity: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .nav-logo-wrap {
+    min-width: 6.6rem !important;
+  }
+
+  .newclear-wordmark--nav {
+    font-size: 1.12rem;
+  }
+}
+
+/* Scroll-driven editorial ticker, inspired by Motion's Scroll Text Lines. */
+.newclear-scroll-lines {
+  background: #08100d;
+  color: var(--white, #fff);
+  height: 220vh;
+  isolation: isolate;
+  overflow: clip;
+  position: relative;
+}
+
+.newclear-scroll-lines__sticky {
+  align-content: center;
+  display: grid;
+  gap: clamp(2rem, 3vw, 3.5rem);
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  position: sticky;
+  top: 0;
+}
+
+.newclear-scroll-line {
+  overflow: hidden;
+  width: 100%;
+}
+
+.newclear-scroll-line__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.newclear-scroll-line__group {
+  align-items: center;
+  display: flex;
+  flex: none;
+}
+
+.newclear-scroll-line__word {
+  color: var(--white, #fff);
+  flex: none;
+  font-family: Impact, "Arial Narrow", Arial, sans-serif;
+  font-size: clamp(5.5rem, 10vw, 10rem);
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  line-height: 0.78;
+  margin-right: 0.25em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.newclear-scroll-line__word.is-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.34);
+}
+
+@media screen and (max-width: 767px) {
+  .newclear-scroll-lines {
+    height: 190vh;
+  }
+
+  .newclear-scroll-lines__sticky {
+    gap: clamp(1.4rem, 4.5vw, 2.25rem);
+  }
+
+  .newclear-scroll-line__word {
+    font-size: clamp(4.6rem, 21vw, 8rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .newclear-scroll-lines {
+    height: auto;
+  }
+
+  .newclear-scroll-lines__sticky {
+    min-height: 100svh;
+    position: relative;
+  }
+
+  .newclear-scroll-line__track {
+    transform: translate3d(-25%, 0, 0) !important;
+  }
+}
