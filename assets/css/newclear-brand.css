@@ -1,9 +1,53 @@
+@font-face {
+  font-display: swap;
+  font-family: "Space Mono";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/space-mono/SpaceMono-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "Space Mono";
+  font-style: italic;
+  font-weight: 400;
+  src: url("../fonts/space-mono/SpaceMono-Italic.ttf") format("truetype");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "Space Mono";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/space-mono/SpaceMono-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "Space Mono";
+  font-style: italic;
+  font-weight: 700;
+  src: url("../fonts/space-mono/SpaceMono-BoldItalic.ttf") format("truetype");
+}
+
+body,
+body * {
+  font-family: "Space Mono", monospace !important;
+}
+
+.nothin-hero-svg text {
+  font-family: "Space Mono", monospace !important;
+}
+
 /* NewClear brand overrides. The original SVG nodes stay in the DOM so the
    downloaded Webflow animations can still initialize without errors. */
 .nav-logo,
-.nothin-hero-svg,
 .footer-nothin-svg {
   opacity: 0 !important;
+}
+
+.nothin-hero-svg {
+  opacity: 1;
 }
 
 .nav-logo-wrap,
@@ -18,8 +62,10 @@
 
 .newclear-wordmark {
   color: currentColor;
-  font-family: "PP Neue Montreal", Arial, sans-serif;
-  font-weight: 600;
+  font-family: "Space Mono", monospace !important;
+  font-style: normal !important;
+  font-synthesis: none;
+  font-weight: 700 !important;
   letter-spacing: -0.07em;
   line-height: 0.78;
   pointer-events: none;
@@ -46,12 +92,20 @@
 
 .newclear-wordmark--hero {
   background: var(--white, #fff);
+  display: none !important;
+  font-family: "Space Mono", monospace !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
   font-size: 19vw;
+  opacity: 0;
   overflow: hidden;
   z-index: 2;
 }
 
 .newclear-wordmark--hero .newclear-letter-mask {
+  font-family: "Space Mono", monospace !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
   transform: scaleY(1.18);
   transform-origin: center;
 }
@@ -73,8 +127,12 @@
   animation-delay: calc(var(--letter-index) * 110ms);
 }
 
-.newclear-wordmark--hero.is-complete {
+.newclear-wordmark--hero.is-revealing {
   opacity: 1;
+}
+
+.newclear-wordmark--hero.is-complete {
+  opacity: 0;
   transition: opacity 320ms ease;
 }
 
@@ -103,13 +161,6 @@
   to {
     transform: translateY(0%);
   }
-}
-
-/* Keep the HTML fallback until the smoke canvas initializes. Once it exists,
-   the canvas becomes the visible NEWCLEAR wordmark and the video is revealed
-   through its fluid mask. */
-.section-w:has(.mask-reveal-canvas) .newclear-wordmark--hero:not(.is-revealing) {
-  opacity: 0;
 }
 
 @media screen and (max-width: 767px) {
@@ -163,7 +214,7 @@
 .newclear-scroll-line__word {
   color: var(--white, #fff);
   flex: none;
-  font-family: Impact, "Arial Narrow", Arial, sans-serif;
+  font-family: "Space Mono", monospace;
   font-size: clamp(5.5rem, 10vw, 10rem);
   font-weight: 900;
   letter-spacing: -0.035em;

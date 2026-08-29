@@ -2,6 +2,14 @@
   var wordmark = document.querySelector(".newclear-wordmark--hero");
   if (!wordmark) return;
 
+  // The smoke canvas uses the SVG wordmark as its mask. Keep the HTML
+  // letter-reveal wordmark as a fallback only, otherwise it duplicates and
+  // covers the interactive video reveal.
+  if (document.querySelector(".nothin-hero-svg")) {
+    wordmark.setAttribute("aria-hidden", "true");
+    return;
+  }
+
   var finishTimer;
   var visibilityTimer;
 
